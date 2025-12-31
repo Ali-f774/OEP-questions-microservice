@@ -1,0 +1,20 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: questions-microservice
+
+  mongodb:
+    uri: mongodb://root:ROOT@localhost:27017/quiz_app?authSource=admin
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/OEP
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
