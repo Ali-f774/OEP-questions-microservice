@@ -2,7 +2,6 @@ package ir.maktabsharif.questionsmicroservice.controller;
 
 import ir.maktabsharif.questionsmicroservice.dto.AddQuestionDTO;
 import ir.maktabsharif.questionsmicroservice.dto.GeneralQuestionDTO;
-import ir.maktabsharif.questionsmicroservice.dto.GeneralReqDTO;
 import ir.maktabsharif.questionsmicroservice.mapper.DataMapper;
 import ir.maktabsharif.questionsmicroservice.model.Question;
 import ir.maktabsharif.questionsmicroservice.model.QuestionType;
@@ -47,7 +46,7 @@ public class QuestionController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasRole('PROFESSOR')")
+    @PreAuthorize("hasAnyRole('PROFESSOR')")
     @ResponseStatus(HttpStatus.OK)
     public AddQuestionDTO findById(@RequestParam String id){
         Question byId = service.findById(id);
@@ -55,7 +54,7 @@ public class QuestionController {
     }
 
     @GetMapping("/exam")
-    @PreAuthorize("hasRole('PROFESSOR')")
+    @PreAuthorize("hasAnyRole('PROFESSOR','STUDENT')")
     @ResponseStatus(HttpStatus.OK)
     public List<AddQuestionDTO> findByExamId(@RequestParam Long examId){
         List<Question> list = service.findByExamId(examId);
