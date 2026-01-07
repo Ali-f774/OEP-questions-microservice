@@ -46,7 +46,7 @@ public class QuestionController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasAnyRole('PROFESSOR')")
+    @PreAuthorize("hasAnyRole('PROFESSOR','STUDENT')")
     @ResponseStatus(HttpStatus.OK)
     public AddQuestionDTO findById(@RequestParam String id){
         Question byId = service.findById(id);

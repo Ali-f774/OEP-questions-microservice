@@ -1,11 +1,14 @@
 package ir.maktabsharif.questionsmicroservice.service.impl;
 
 import ir.maktabsharif.questionsmicroservice.model.Answer;
+import ir.maktabsharif.questionsmicroservice.model.Question;
 import ir.maktabsharif.questionsmicroservice.repository.AnswerRepository;
 import ir.maktabsharif.questionsmicroservice.service.AnswerService;
+import ir.maktabsharif.questionsmicroservice.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +16,7 @@ import java.util.List;
 public class AnswerServiceImpl implements AnswerService {
 
     private final AnswerRepository repository;
+    private final QuestionService questionService;
 
     @Override
     public Answer addOrUpdate(Answer answer) {
@@ -26,7 +30,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> findExamStudentAnswers(Long studentId, Long examId) {
-        return repository.findAllByStudentIdAndQuestion_ExamId(studentId, examId);
+        List<Question> questions = questionService.findByExamId(examId);
+        return repository.findAllByStudentIdAndQuestionIn(studentId,questions);
     }
 
     @Override

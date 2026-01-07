@@ -25,4 +25,6 @@ public class Answer {
 
     private String answer;
 
+    private Double grade;
+
 }

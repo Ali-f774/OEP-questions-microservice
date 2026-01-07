@@ -32,6 +32,6 @@ public interface DataMapper {
     @Mapping(target = "question",ignore = true)
     Answer toAnswerEntity(AddAnswerDTO dto);
 
-    @Mapping(target = "questionId",ignore = true)
+    @Mapping(source = "question.id",target = "questionId")
     AddAnswerDTO toAddAnswerDto(Answer answer);
 }

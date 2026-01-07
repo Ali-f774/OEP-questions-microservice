@@ -24,7 +24,7 @@ public class AnswerController {
     private final AnswerService service;
 
     @PostMapping
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasAnyRole('STUDENT','PROFESSOR')")
     @ResponseStatus(HttpStatus.OK)
     public String addOrUpdateAnswer(@RequestBody AddAnswerDTO dto) {
         Question question;
@@ -43,7 +43,7 @@ public class AnswerController {
     }
 
     @GetMapping("/student")
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasAnyRole('STUDENT','PROFESSOR')")
     @ResponseStatus(HttpStatus.OK)
     public AddAnswerDTO getStudentAnswer(@RequestParam Long studentId, @RequestParam String questionId) {
         Answer answer = service.findByStudentIdAndQuestionId(studentId,questionId);
